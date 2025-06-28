@@ -91,6 +91,15 @@ main{
     width: 100%;
 }
 
+.item.clicked{
+    background: #d4f6d9;
+}
+
+.item.clicked .item-name{
+    text-decoration: line-through;
+    color: gray;
+}
+
 .mdi-check-circle{
     color: green;
 }
