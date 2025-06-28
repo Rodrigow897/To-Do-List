@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@7.4.47/css/materialdesignicons.min.css">
+    <title>To-do list</title>
+</head>
+
+<body>
+
+    <h1>To-do list</h1>
+
+    <header>
+        <input id="inputTask" type="text" placeholder="Enter your task">
+        <button class="add">add to list</button>
+    </header>
+    <main id="areaList">
+        <div class="item">
+            <div class="item-icon">
+                <i class="mdi mdi-circle-outline"></i>
+            </div>
+            <div class="item-name">
+                teste de tarefa
+            </div>
+            <div class="item-button">
+                <button class="delete"><i class="mdi mdi-delete"></i>Delete</button>
+
+            </div>
+        </div>
+
+        <div class="item clicked">
+            <div class="item-icon">
+                <i class="mdi mdi-check-circle"></i>
+            </div>
+            <div class="item-name">
+                teste de tarefa
+            </div>
+            <div class="item-button">
+                <button class="delete"><i class="mdi mdi-delete"></i>Delete</button>
+
+            </div>
+        </div>
+
+    </main>
+
+    <script src="js/control.js"></script>
+</body>
+</html>
