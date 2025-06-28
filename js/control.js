@@ -1,3 +1,4 @@
+let counter = 0;
 let input = document.getElementById('inputTask');
 let btnAdd = document.getElementById('btn-add');
 let main = document.getElementById('areaList')
@@ -8,15 +9,18 @@ function addTask() {
 
     //if it is not empty, not null, not undefined
     if((inputValue !=="") && (inputValue !== null) && (inputValue !== undefined)) {
-        let newItem = `<div class="item">
-            <div class="item-icon">
-                <i class="mdi mdi-circle-outline"></i>
+        
+        ++counter;
+        
+        let newItem = `<div id="${counter}" class="item">
+            <div onclick="markTask(${counter})" class="item-icon">
+                <i id="icon_${counter}" class="mdi mdi-circle-outline"></i>
             </div>
-            <div class="item-name">
+            <div onclick="markTask(${counter})" class="item-name">
                 ${inputValue}
             </div>
             <div class="item-button">
-                <button class="delete"><i class="mdi mdi-delete"></i>Delete</button>
+                <button onclick="deleteTask(${counter})" class="delete"><i class="mdi mdi-delete"></i>Delete</button>
 
             </div>
         </div>`;
@@ -28,6 +32,35 @@ function addTask() {
         input.value = "";
         input.focus();
     }
+}
+
+function deleteTask(id) {
+    var task = document.getElementById(id);
+    task.remove();
+}
+
+function markTask(id) {
+    var item = document.getElementById(id)
+    var clas = item.getAttribute('class');
+
+    if(clas=='item') {
+        item.classList.add('clicked')
+
+        var icon = document.getElementById('icon_' + id);
+        icon.classList.remove('mdi-circle-outline');
+        icon.classList.add('mdi-check-circle');
+
+        item.parentNode.appendChild(item);
+
+    } else {
+        item.classList.remove('clicked')
+
+        var icon = document.getElementById('icon_' + id);
+        icon.classList.remove('mdi-check-circle');
+        icon.classList.add('mdi-circle-outline');
+
+    }
+
 }
 
 input.addEventListener("keyup", function(event){
