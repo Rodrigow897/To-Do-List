@@ -20,7 +20,7 @@ function addTask() {
                 ${inputValue}
             </div>
             <div class="item-button">
-                <button onclick="deleteTask(${counter})" class="delete"><i class="mdi mdi-delete"></i>Delete</button>
+                <button onclick="deleteTask(${counter})" class="delete"><i class="mdi mdi-delete"></i></button>
 
             </div>
         </div>`;
