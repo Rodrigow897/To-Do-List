@@ -39,6 +39,13 @@ body{
     cursor: pointer;
 }
 
+#btn-add:hover{
+    box-shadow: 0 0 20px #13c549;
+    background-color: #13c549;
+    border: solid 0.5px green;
+    transition: 0.5s;
+}
+
 .title{
     font-weight: bold;
     text-align: center;
@@ -53,6 +60,10 @@ body{
     border-radius: 8px;
     box-shadow: 0 0 20px #ccc;
     outline: none;
+}
+
+#inputTask:hover{
+    border: solid 0.5px gray; 
 }
 
 #areaList {
