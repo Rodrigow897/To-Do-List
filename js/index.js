@@ -6,8 +6,8 @@ app.use(express.json());
 
 app.get('/task', async (__, res) => {
     try{
-        const task = await Pool.query('SELECT * FROM tb_task');
-        res.status(200).json(console.rows);
+        const task = await pool.query('SELECT * FROM tb_task');
+        res.status(200).json(task.rows);
     } catch (err) {
         res.status(404).json('error when searching for tasks', err);
     }
@@ -17,10 +17,10 @@ app.post('/task', async (req, res) => {
     const {title, completed} = req.body;
 
     try{
-        const task = await Pool.query('INSERT INTO tb_task (title, completed) VALUES ($1, $2) RETURNING *',
+        const task = await pool.query('INSERT INTO tb_task (title, completed) VALUES ($1, $2) RETURNING *',
             [title, completed]
         );
-        res.status(200).json(console.rows[0]);
+        res.status(200).json(task.rows[0]);
     } catch (err) {
         console.error('error when adding tasks', err)
         res.status(500).json({error: 'error when adding tasks'})
@@ -32,7 +32,7 @@ app.put('/task', async (res, req) => {
     const {title, completed} = req.body;
 
     try{
-        const task = await Pool.query('UPDATE tb_task SET title = $1, completed = $2 WHERE id = $3 RETURNING *',
+        const task = await pool.query('UPDATE tb_task SET title = $1, completed = $2 WHERE id = $3 RETURNING *',
             [title, completed, id]
         );
 
@@ -40,19 +40,19 @@ app.put('/task', async (res, req) => {
             return res.status(404).json({error: 'error when searching for tasks'});
         } 
 
-        res.status(200).json(console.rows[0]);
+        res.status(200).json(task.rows[0]);
     } catch (err) {
         console.error('error when updating tasks', err);
         res.status(500).json({error: 'error when updating tasks'});
     }
 });
 
-app.delete('/task', async (req, res) => {
-    const {id} = req.params
+app.delete('/task/:id', async (req, res) => {
+    const {id} = req.params;
 
     try{
-        const task = await Pool.query('DELETE FROM tb_task WHERE id = $1 RETURNING *,' [id]);
-        if (task.rowCount === 0) {
+        const task = await pool.query('DELETE FROM tb_task WHERE id = $1 RETURNING *', [id]);
+        if (task.rowount === 0) {
             res.status(404).json({error: 'error when searching for tasks'});
         }
         res.status(200).json({message: 'task deleted successfully'});
